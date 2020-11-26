@@ -30,24 +30,24 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-IAP_STM32F7-master.elf \
+IAP_STM32F7.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-IAP_STM32F7-master.list \
+IAP_STM32F7.list \
 
 OBJCOPY_BIN += \
-IAP_STM32F7-master.bin \
+IAP_STM32F7.bin \
 
 
 # All Target
-all: IAP_STM32F7-master.elf secondary-outputs
+all: IAP_STM32F7.elf secondary-outputs
 
 # Tool invocations
-IAP_STM32F7-master.elf: $(OBJS) $(USER_OBJS) D:\mcu\IAP_STM32F7-master\STM32F767ZITX_FLASH.ld
-	arm-none-eabi-gcc -o "IAP_STM32F7-master.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\mcu\IAP_STM32F7-master\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="IAP_STM32F7-master.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+IAP_STM32F7.elf: $(OBJS) $(USER_OBJS) D:\mcu\IAP_STM32F7\STM32F767ZITX_FLASH.ld
+	arm-none-eabi-gcc -o "IAP_STM32F7.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\mcu\IAP_STM32F7\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="IAP_STM32F7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -56,13 +56,13 @@ default.size.stdout: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-IAP_STM32F7-master.list: $(EXECUTABLES)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "IAP_STM32F7-master.list"
+IAP_STM32F7.list: $(EXECUTABLES)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "IAP_STM32F7.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-IAP_STM32F7-master.bin: $(EXECUTABLES)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "IAP_STM32F7-master.bin"
+IAP_STM32F7.bin: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "IAP_STM32F7.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
